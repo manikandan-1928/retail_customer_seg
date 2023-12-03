@@ -1,0 +1,27 @@
+/* Styling for the form and container */
+form {
+    margin-bottom: 20px;
+}
+
+#spinner {
+    display: none;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Styling for individual images */
+#results img {
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    height: auto;
+}

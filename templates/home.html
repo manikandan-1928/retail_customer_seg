@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Segmentation</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- CSS -->
+    <link rel="stylesheet" href="static/style.css">
+</head>
+  
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid justify-content-center">
+            <a class="navbar-brand" href="#">CUSTOMER SEGMENTATION (UNSUPERVISED LEARNING)</a>
+        </div>
+    </nav>
+    <br><br><br>
+
+    <h2>Upload a File</h2>
+
+    <form id="uploadForm">
+        <input type="file" id="file-upload" accept=".csv">
+        <input type="button" value="Predict" onclick="handleSubmit()">
+    </form>
+
+    <div id="spinner" style="display: none;">
+        Loading...
+    </div>
+
+    <div id="results">
+        <!-- Images will be added dynamically using JavaScript -->
+    </div>
+
+    <div class="mt-5">
+        <p id="output-message"></p>
+        <p style="position: absolute; bottom: 0; right: 0;"><strong>Project by Manikandan</strong></p>
+    </div>
+
+    <!-- External JavaScript file for handling form submission -->
+    <script src="static/scripts.js"></script>
+</body>
+</html>

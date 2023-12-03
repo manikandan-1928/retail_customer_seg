@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Segmentation</title>
+    <!-- Bootstrap -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- CSS -->
+    <link rel="stylesheet" href="templates/style.css">
+</head>
+  
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid justify-content-center">
+            <a class="navbar-brand" href="#">CUSTOMER SEGMENTATION (UNSUPERVISED LEARNING)</a>
+        </div>
+    </nav>
+    <br><br><br>
+
+    <h2>Upload a File</h2>
+
+    <form id="uploadForm" onsubmit="handleSubmit(event)">
+        <input type="file" id="file-upload" accept=".csv">
+        <input type="submit" value="Predict">
+    </form>
+
+    <div id="spinner" style="display: none;">
+        Loading...
+    </div>
+
+    <div id="results">
+        <!-- Images will be added dynamically using JavaScript -->
+    </div>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+
+            var file = document.getElementById('file-upload').files[0];
+            var formdata = new FormData();
+            formdata.append('file', file);
+
+            var spinner = document.getElementById('spinner');
+            spinner.style.display = 'block';
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('post', '/predict');
+            xhr.send(formdata);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    document.getElementById('results').innerHTML = '';
+
+                    var response = JSON.parse(xhr.responseText);
+
+                    for (var key in response) {
+                        if (response.hasOwnProperty(key)) {
+                            var img = document.createElement('img');
+                            img.src = response[key];
+                            img.style.width = '30%';
+                            document.getElementById('results').appendChild(img);
+                        }
+                    }
+
+                    spinner.style.display = 'none';
+                }
+            };
+        }
+    </script>
+
+    {% if output_saved_message %}
+    <p>{{ output_saved_message }}</p>
+    <img src="{{ tot_amt_img }}" alt="Total Amount Image">
+    <img src="{{ items_img }}" alt="No. of Items Purchased Image">
+    <img src="{{ freq_img }}" alt="No. of Times Ordered Image">
+    <img src="{{ amt_per_order_img }}" alt="Amount per Order Image">
+    <img src="{{ recency_img }}" alt="Recency Image">
+    <img src="{{ history_img }}" alt="History of Customer Image">
+    {% endif %}
+
+    <div class="mt-5">
+        {% if output_saved_message %}
+    <p>{{ output_saved_message }}</p>
+        {% endif %}
+    <p style="position: absolute; bottom: 0; right: 0;"><strong>Project by Manikandan</strong></p>
+    
+    </div>
+</body>
+</html>
